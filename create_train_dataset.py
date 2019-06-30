@@ -1,5 +1,7 @@
 import os
 import glob
+from sklearn.model_selection import train_test_split
+import json
 """
 create a list of file (full directory)
 """
@@ -17,6 +19,10 @@ def create_training_image_list(data_path):
 
 
 if __name__ == "__main__":
-    DATA_PATH = "/data/cv_data/ShanghaiTech/part_A/train_data/"
     image_path_list = glob.glob(os.path.join(DATA_PATH, "images", "*.jpg"))
-    print(image_path_list)
+    train, val = train_test_split(image_path_list, test_size=0.1)
+
+    print("train size ", len(train))
+    print("val size ", len(val))
+    json.dump(train, open("json/meow_train.json", 'w'))
+    json.dump(val, open("json/meow_val.json", 'w'))
