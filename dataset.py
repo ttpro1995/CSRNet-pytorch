@@ -7,11 +7,24 @@ from PIL import Image
 from image import *
 import torchvision.transforms.functional as F
 
+
 class listDataset(Dataset):
     def __init__(self, root, shape=None, shuffle=True, transform=None,  train=False, seen=0, batch_size=1, num_workers=4):
+        """
+        if you have different image size, then batch_size must be 1
+        :param root:
+        :param shape:
+        :param shuffle:
+        :param transform:
+        :param train:
+        :param seen:
+        :param batch_size:
+        :param num_workers:
+        """
         if train:
             root = root *4
-        random.shuffle(root)
+        if shuffle:
+            random.shuffle(root)
         
         self.nSamples = len(root)
         self.lines = root
@@ -22,9 +35,9 @@ class listDataset(Dataset):
         self.batch_size = batch_size
         self.num_workers = num_workers
         
-        
     def __len__(self):
         return self.nSamples
+
     def __getitem__(self, index):
         assert index <= len(self), 'index range error' 
         
