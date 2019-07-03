@@ -8,7 +8,7 @@ from image import *
 import torchvision.transforms.functional as F
 
 
-class listDataset(Dataset):
+class ListDataset(Dataset):
     def __init__(self, root, shape=None, shuffle=True, transform=None,  train=False, seen=0, batch_size=1, num_workers=4):
         """
         if you have different image size, then batch_size must be 1

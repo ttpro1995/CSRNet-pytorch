@@ -7,6 +7,8 @@ create a list of file (full directory)
 """
 
 DATA_PATH = "/data/cv_data/shanghaitech-with-people-density-map/ShanghaiTech/part_A/train_data"
+
+
 def create_training_image_list(data_path):
     """
     create a list of absolutely path of jpg file
@@ -16,6 +18,16 @@ def create_training_image_list(data_path):
     DATA_PATH = data_path
     image_path_list = glob.glob(os.path.join(DATA_PATH, "images", "*.jpg"))
     return image_path_list
+
+
+def get_train_val_list(data_path):
+    DATA_PATH = data_path
+    image_path_list = glob.glob(os.path.join(DATA_PATH, "images", "*.jpg"))
+    train, val = train_test_split(image_path_list, test_size=0.1)
+
+    print("train size ", len(train))
+    print("val size ", len(val))
+    return train, val
 
 
 if __name__ == "__main__":
